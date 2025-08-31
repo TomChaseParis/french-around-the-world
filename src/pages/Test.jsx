@@ -5,6 +5,7 @@ import audioFaireFile from "../faire.mp3";
 import audioAllerFile from "../aller.mp3";
 import testVideo from "../videoexo.mp4";
 import TestTwo from './TestTwo'
+import TestThree from './TestThree'
 import BenTop from "../Benoit Brisefer Vous avez l'heure (1).png"
 
 const Test = () => {
@@ -216,11 +217,21 @@ const Test = () => {
         </div>
 
         <div className='pt-[80px]'>
-          <h1 className="text-2xl font-bold text-center">EXERCICE</h1>
+          <h1 className="text-2xl font-bold text-center">EXERCICE 1 </h1>
           <div className='pt-[60px]'>
             <TestTwo />
           </div>
-          <div></div>
+          <div>
+          
+          </div>
+        </div>
+        <div className='pt-[80px]'>
+          <h1 className="text-2xl font-bold text-center">EXERCICE 2 </h1>
+          <p className='text-center font-semibold pt-7'>Complétez avec les verbes "Être", "Aller", "Avoir" et "Faire" au présent de l'indicatif.</p>
+          <div className='pt-[60px]'>
+            <TestThree />
+          </div>
+     
         </div>
       </div>
     </>

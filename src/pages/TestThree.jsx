@@ -2,57 +2,35 @@ import React, { useState, useEffect } from "react";
 
 const categories = [
   {
-    title: "1. ÊTRE",
     items: [
-      { phrase: "Qui ....... étudiant ? Qui travaille ?", word: "est" },
-      { phrase: "Où ....... les toilettes ?", word: "sont" },
-      { phrase: "Je ne ....... pas français", word: "pas" },
-      { phrase: "Tu ....... fatigué ?", word: "es" },
-      { phrase: "Nous ....... étrangers", word: "sommes" },
-      { phrase: "Merci, vous ....... bien aimables", word: "êtes" },
-      { phrase: "On ....... en retard. Excusez-nous", word: "est" },
-    ],
-  },
-  {
-    title: "2. AVOIR",
-    items: [
-      { phrase: "Tu ....... quel âge ?", word: "as" },
-      { phrase: "Excusez-moi, je n'....... pas le temps", word: "ai" },
-      { phrase: "Ils n'....... pas d'argent", word: "ont" },
-      { phrase: "Pardon, vous ....... l'heure ?", word: "avez" },
-      { phrase: "Nous ....... un problème", word: "avons" },
-      { phrase: "Elle ....... 15 ans", word: "a" },
-      { phrase: "Vous ....... une minute s'il vous plaît ?", word: "avez" },
-      { phrase: "On ....... faim et soif", word: "a" },
-    ],
-  },
-  {
-    title: "3. FAIRE",
-    items: [
-      { phrase: "Qu'est-ce qu'elle ....... comme études ?", word: "fait" },
-      { phrase: "Vous ....... du sport ?", word: "faites" },
-      { phrase: "Elles ....... un voyage en Asie", word: "font" },
-      { phrase: "Je vous ....... un café ?", word: "fais" },
-      { phrase: "Il ....... froid aujourd'hui ?", word: "fait" },
-      { phrase: "Nous ....... des études en France", word: "faisons" },
-      { phrase: "Qu'est-ce que tu ....... ce soir ?", word: "fais" },
-    ],
-  },
-  {
-    title: "4. ALLER",
-    items: [
-      { phrase: "Vous ....... bien ?", word: "allez" },
-      { phrase: "Elle ....... où ?", word: "va" },
-      { phrase: "On ....... au cinéma ?", word: "va" },
-      { phrase: "Tu ....... téléphoner ?", word: "vas" },
-      { phrase: "Mes parents ne ....... pas bien", word: "vont" },
-      { phrase: "Je ....... avec toi", word: "vais" },
-      { phrase: "Nous ....... à la banque", word: "allons" },
+      { phrase: "Mes amis ....... une maison à la campagne.", word: "ont" },
+      { phrase: "La mère de Lucie ....... espagnole", word: "est" },
+      { phrase: "Pierre et Jacques ....... du sport tous les week end.", word: "font" },
+      { phrase: "Tu ....... au théâtre.", word: "vas" },
+      { phrase: "Louna ....... photographe.", word: "est" },
+      { phrase: "Tu ....... froid ?", word: "as" },
+      { phrase: "Je ....... au supermarché en voiture", word: "vais" },
+      { phrase: "Nous ....... célibataires", word: "sommes" },
+      { phrase: "Vous ....... 20 ans", word: "avez" },
+      { phrase: "Mes cousines ....... un ami à Lisbonne", word: "ont" },
+      { phrase: "Lucien ....... un téléphone portable", word: "a" },
+      { phrase: "Nous ....... au bureau à pied.", word: "allons" },
+      { phrase: "Vous ....... les courses le samedi matin.", word: "faites" },
+      { phrase: "Tu ....... triste.", word: "es" },
+      { phrase: "La soupe ....... chaude.", word: "est" },
+      { phrase: "Ils ....... du tennis.", word: "font" },
+      { phrase: "Le bébé ....... faim", word: "a" },
+      { phrase: "Thérèse ....... au supermarché en voiture", word: "vais" },
+      { phrase: "Jasmine ....... sommeil.", word: "a" },
+      { phrase: "Vous ....... au restaurant tous les soirs.", word: "allez" },
+      { phrase: "Vous ....... en retard ce matin.", word: "êtes" },
+      { phrase: "Mes voisins ....... la fête tous les vendredis soirs.", word: "font" },
+      { phrase: "Vous ....... soif ?", word: "avez" },
+      { phrase: "Ses parents ....... en Argentine pour les vacances.", word: "sont" },
     ],
   },
 ];
 
-// Réponses correctes aléatoires
 const correctResponses = [
   "Très bien, c'est correct !",
   "Bravo, tu as trouvé la bonne réponse !",
@@ -61,7 +39,6 @@ const correctResponses = [
   "Super, tu progresses !"
 ];
 
-// Mauvaises réponses aléatoires
 const wrongResponses1 = [
   "Ce n’est pas ça, essaie encore.",
   "Mauvaise réponse, essaye à nouveau.",
@@ -87,18 +64,14 @@ const ExerciceStructure = () => {
     categories.map((cat) => cat.items.map(() => 0))
   );
 
-  // Charger les voix au démarrage
   useEffect(() => {
     const synth = window.speechSynthesis;
-
     const loadVoices = () => {
       const availableVoices = synth.getVoices();
       if (availableVoices.length > 0) setVoices(availableVoices);
     };
-
     loadVoices();
     synth.onvoiceschanged = loadVoices;
-
     return () => {
       synth.onvoiceschanged = null;
     };
@@ -185,51 +158,21 @@ const ExerciceStructure = () => {
       const newFeedbacks = feedbacks.map((cat) => [...cat]);
       newFeedbacks[catIndex][itemIndex] = `Erreur : ${event.error}`;
       setFeedbacks(newFeedbacks);
-    };  
+    };
 
     recognition.start();
   };
 
   return (
     <div className="flex flex-col space-y-10 pb-10">
-      {/* Première ligne : ÊTRE et AVOIR */}
       <div className="grid grid-cols-2 gap-x-20">
-        {[0, 1].map((catIndex) => (
+        {categories.map((category, catIndex) => (
           <div key={catIndex}>
             <h4 className="font-bold mb-4 text-[20px]">
-              {categories[catIndex].title}
+              Catégorie {catIndex + 1}
             </h4>
             <ul className="list-disc list-inside space-y-1 text-lg">
-              {categories[catIndex].items.map((item, itemIndex) => (
-                <li key={itemIndex} className="flex items-start space-x-2">
-                  <button
-                    className="bg-purple-500 text-white px-2 py-1 rounded hover:bg-purple-600"
-                    onClick={() => startRecognition(catIndex, itemIndex)}
-                  >
-                    🎤
-                  </button>
-                  <div>
-                    {item.phrase}
-                    <div className="text-sm text-gray-600">
-                      {feedbacks[catIndex][itemIndex]}
-                    </div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </div>
-        ))}
-      </div>
-
-      {/* Deuxième ligne : FAIRE et ALLER */}
-      <div className="grid grid-cols-2 gap-x-20">
-        {[2, 3].map((catIndex) => (
-          <div key={catIndex}>
-            <h4 className="font-bold mb-4 text-[20px]">
-              {categories[catIndex].title}
-            </h4>
-            <ul className="list-disc list-inside space-y-1 text-lg">
-              {categories[catIndex].items.map((item, itemIndex) => (
+              {category.items.map((item, itemIndex) => (
                 <li key={itemIndex} className="flex items-start space-x-2">
                   <button
                     className="bg-purple-500 text-white px-2 py-1 rounded hover:bg-purple-600"
