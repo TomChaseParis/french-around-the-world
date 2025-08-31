@@ -81,7 +81,7 @@ const Test = () => {
   return (
     <> 
       {/* VIDEO FIXÉE À GAUCHE */}
-      <div className="fixed left-0 top-10 z-50 p-4">
+      <div className="absolute left-0 top-10 z-50 p-4">
         <video
           ref={videoRef}
           src={testVideo}
