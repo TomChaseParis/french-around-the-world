@@ -85,7 +85,7 @@ const Test = () => {
         <video
           ref={videoRef}
           src={testVideo}
-          className="w-96 rounded-lg shadow-lg"
+          className="w-[300px] rounded-lg shadow-lg"
           controls={false}
           aria-label="Vidéo exercice"
         />
@@ -101,8 +101,8 @@ const Test = () => {
       </div>
 
       {/* IMAGE FIXÉE EN HAUT À DROITE */}
-      <div className="absolute  top-10 right-0 z-50 pr-[90px]">
-        <img className="h-[470px]" src={BenTop} alt="BenTop" />
+      <div className="absolute  top-22 right-0 z-50 pr-[90px]">
+        <img className="h-[370px]" src={BenTop} alt="BenTop" />
       </div>
 
       {/* CONTENU PRINCIPAL */}
